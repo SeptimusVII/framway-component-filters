@@ -63,7 +63,7 @@
 .filters__line{display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; flex-wrap: wrap; padding: 5px 0  0 5px;
 	&.line--1{background: $primary; color: contrastFW(white,$primary); 
 		%input{background: none; color: inherit; border-color:$primary; }
-		.btn.squared{margin: 0; border-radius: 0; }
+		.btn.squared{margin: 0; border-radius: 0; background: $primary; border-color: $primary; color: currentColor;}
 		input.checkbox,
 		input.radio,
 		input[type="checkbox"],
@@ -81,7 +81,7 @@
 .filters__group{display: flex; align-items: center; margin: 0 5px 5px 0; flex-wrap: wrap;
 	label{margin: 0; line-height: 1.5em; padding: 0.25em 0; white-space: nowrap; margin-right: 0.5em; }
 	%filterEl{margin: 0;}
-	%input.select2-selection{padding-left: 0;}
+	// %input.select2-selection{padding-left: 0;}
 	@include media-max(xxs){width: 100%;
 		label,
 		.select2FW-wrapper{flex-grow: 1; flex-basis: 50%; margin-right: 0;}
