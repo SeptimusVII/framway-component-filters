@@ -63,7 +63,7 @@
 .filters__line{display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; flex-wrap: wrap; padding: 5px 0  0 5px;
 	&.line--1{background: $primary; color: contrastFW(white,$primary); 
 		%input{background: none; color: inherit; border-color:$primary; }
-		.btn.squared{ border-radius: 0; background: $primary; border-color: $primary; color: currentColor;}
+		.btn.squared{ border-radius: 0; background: $primary; border-color: $primary; color: currentColor; min-height: 2em;}
 		.input-group .btn.squared{margin: 0; }
 		input.checkbox,
 		input.radio,
