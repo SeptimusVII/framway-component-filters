@@ -28,7 +28,9 @@
 		@include media-max(xs){min-width: 0; max-width: none; width: 100% !important; }
 	}
 	.select2-container .select2-selection--single .select2-selection__rendered{ padding-right: 30px;}
-  	.select2-dropdown{ min-width: fit-content; max-width: 90vw; }
+  	.select2-dropdown{ max-width: 90vw;
+  		 // min-width: fit-content;
+  	}
 	.select2-container .select2-selection--single .select2-selection__rendered{color: inherit;}
 	.select2-dropdown{background: $primary; color: contrastFW(white,$primary); border-color:$primary;  border-color: rgba(255,255,255,0.1);}
   	.select2-container--default .select2-results__option[aria-selected=true],
