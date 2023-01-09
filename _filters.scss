@@ -14,6 +14,7 @@
 	select,
 	.input-group,
   	.select2FW-wrapper{@extend %filterEl; }
+  	.select2FW-wrapper{min-width: 0;}
   	.input-group{@extend .form-shrink; 
   		%input:not(.select2-selection){margin: 0;
   			&+.squared{ border-radius: 0; z-index: 1; }
