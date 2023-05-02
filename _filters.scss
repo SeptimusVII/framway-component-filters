@@ -43,7 +43,7 @@
 	input[type="radio"]{
 		&+label{
 			position: relative; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
-			// @extend %paper;
+			// @include paper();
 			background: color(white);
 			border-color: color(white);
 			color:contrastFW(btn(font-color),color(white));
