@@ -2,8 +2,8 @@ module.exports = function(app){
     var Filters = Object.getPrototypeOf(app).Filters = new app.Component("filters");
     //Filters.debug = true;
     Filters.createdAt      = "2.0.0";
-    Filters.lastUpdate     = "2.3.0";
-    Filters.version        = "1.0.3";
+    Filters.lastUpdate     = "2.4.0";
+    Filters.version        = "1.0.4";
     // Filters.factoryExclude = true;
     // Filters.loadingMsg     = "This message will display in the console when component will be loaded.";
     // Filters.requires       = [];
