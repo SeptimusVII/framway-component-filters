@@ -70,8 +70,8 @@
 		}
 		.select2-container--default .select2-selection--single .select2-selection__placeholder{color: rgba(contrastFW(white,$primary),0.7);}
 
-		.btn.squared{ border-radius: 0; background: $primary; border-color: $primary; color: currentColor; min-height: 2em;}
-		.input-group .btn.squared{margin: 0; }
+		%btn.squared{ border-radius: 0; background: $primary; border-color: $primary; color: currentColor; min-height: 2em;}
+		.input-group %btn.squared{margin: 0; }
 		input.checkbox,
 		input.radio,
 		input[type="checkbox"],
@@ -86,7 +86,7 @@
 	@include media-max(xs){min-width: 100%; flex-basis:  100%;}
 	&.col--right{justify-content: flex-end; order: 2;}
 	&:only-child{flex-basis: 100%;}
-	&>.btn{margin: 0; margin-right: 5px; margin-bottom: 5px;}
+	&>%btn{margin: 0; margin-right: 5px; margin-bottom: 5px;}
 }
 .filters__group{display: flex; align-items: center; margin: 0 5px 5px 5px; flex-wrap: wrap;
 	label{margin: 0; line-height: 1.5em; padding: 0.25em 0; white-space: nowrap; margin-right: 0.25em; }
