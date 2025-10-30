@@ -3,7 +3,7 @@ module.exports = function(app){
     //Filters.debug = true;
     Filters.createdAt      = "2.0.0";
     Filters.lastUpdate     = "2.7.0";
-    Filters.version        = "1.1.1";
+    Filters.version        = "1.2.0";
     // Filters.factoryExclude = true;
     // Filters.loadingMsg     = "This message will display in the console when component will be loaded.";
     // Filters.requires       = [];
@@ -16,26 +16,9 @@ module.exports = function(app){
         filters.blnAutocomplete = (filters.blnAutocomplete !== undefined) ? filters.blnAutocomplete : filters.getData('autocomplete',false);
         filters.submit          = (filters.submit !== undefined)          ? filters.submit          : filters.getData('submit',false);
         filters.blnReset        = (filters.blnReset !== undefined)        ? filters.blnReset        : filters.getData('reset',false);
+        filters.blnCount        = (filters.blnCount !== undefined)        ? filters.blnCount        : filters.getData('count',false);
+        filters.blnRemoveEmpty  = (filters.blnRemoveEmpty !== undefined)  ? filters.blnRemoveEmpty  : filters.getData('removeempty',false);
 
-        if (filters.blnReset) {
-            filters.$el.append('<span class="filters__reset"><i class="fa fa-times"></i></span>');
-            $('.filters__reset').on('click',function(){
-                filters.$filters.val('').trigger('change');
-            });
-        }
-        if (filters.blnAutocomplete) {
-            filters.$filters.each(function(i,filter){
-                if (filter.nodeName == 'SELECT') {
-                    if ($(filter).attr('data-label') != '')
-                        $(filter).prepend('<option value="">'+$(filter).attr('data-label')+'</option>');
-                    var arrFilters = [];
-                    filters.$items.each(function(){
-                        if($(this).attr('data-'+$(filter).attr('data-filter')))
-                            arrFilters.push($(this).attr('data-'+$(filter).attr('data-filter')));
-                    });
-                    arrFilters = [ ...new Set(arrFilters.sort())];
-                    $.each(arrFilters,function(){
-                        $(filter).append('<option value="'+this+'">'+this+'</option>')
        
 
         if (filters.$filters && filters.$container && filters.$items) {
@@ -57,31 +40,31 @@ module.exports = function(app){
                     }
                 });
             }
-                    });
-                    $(filter).trigger('change');
-                }
-            });
-        }
-        if (filters.submit && filters.$el.closest('form').length) {
-            filters.$filters.filter('select').on('change',function(e){
-                if (filters.$el.closest('form').length){
-                    filters.$el.closest('form').trigger('submit');
-                    return false
-                }
-            });
-        } else {
-            filters.$filters.on('change keyup',function(e){
-                // console.log('filter change');
-                filters.$items.removeClass('hidden');
+            if(filters.blnCount){
                 filters.$filters.each(function(i,filter){
-                    var $filter = $(filter);
+                    var $filter = $(this);
                     var target = $filter.attr('data-filter');
-                    var value = $filter.val();
-                    if (value != ""){
-                        if (filter.nodeName == 'SELECT')
-                            filters.$items.not('[data-'+target+'="'+value+'"]').addClass('hidden');
-                        if (filter.nodeName == 'INPUT' && filter.getAttribute('type') == 'text')
-                            filters.$items.not('[data-'+target+'*="'+value.toLowerCase()+'"]').addClass('hidden');
+                    $filter.find('option').each(function(k,option){
+                        if ($(option).attr('value'))
+                            if ($(option).attr('data-label'))
+                                $(option).html($(option).attr('data-label')+' ('+filters.$items.filter('[data-'+target+'="'+$(option).attr('value')+'"]').length+')');
+                            else
+                                $(option).html($(option).attr('value')+' ('+filters.$items.filter('[data-'+target+'="'+$(option).attr('value')+'"]').length+')');
+                    });
+                });
+            }
+
+            if (filters.blnRemoveEmpty) {
+                filters.$filters.each(function(i,filter){
+                    var $filter = $(this);
+                    var target = $filter.attr('data-filter');
+                    $filter.find('option').each(function(k,option){
+                        if (filters.$items.filter('[data-'+target+'="'+$(option).attr('value')+'"]').length == 0 && $(option).attr('value') != '') {
+                            $(option).remove()
+                        }
+                    });
+                });
+            }
 
             if (filters.blnReset) {
                 filters.$el.append('<span class="filters__reset"><i class="fa fa-times"></i></span>');
