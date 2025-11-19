@@ -3,7 +3,7 @@ module.exports = function(app){
     //Filters.debug = true;
     Filters.createdAt      = "2.0.0";
     Filters.lastUpdate     = "2.7.0";
-    Filters.version        = "1.2.0";
+    Filters.version        = "1.2.1";
     // Filters.factoryExclude = true;
     // Filters.loadingMsg     = "This message will display in the console when component will be loaded.";
     // Filters.requires       = [];
@@ -11,8 +11,11 @@ module.exports = function(app){
     Filters.prototype.onCreate = function(){
         var filters = this;
         filters.$filters   = filters.$el.find('.filter').length                       ? filters.$el.find('.filter')                       : false;
-        filters.$container = $(filters.getData('container')).length                   ? $(filters.getData('container'))                   : false;
-        filters.$items     = filters.$container.find(filters.getData('items')).length ? filters.$container.find(filters.getData('items')) : false;
+        filters.$container = $(filters.getData('container'),'#ThereIsNoContainer').length ? $(filters.getData('container'),false)         : false;
+        if (filters.$container) 
+            filters.$items     = filters.$container.find(filters.getData('items')).length ? filters.$container.find(filters.getData('items')) : false;
+        else    
+            filters.$items = false;
         filters.blnAutocomplete = (filters.blnAutocomplete !== undefined) ? filters.blnAutocomplete : filters.getData('autocomplete',false);
         filters.submit          = (filters.submit !== undefined)          ? filters.submit          : filters.getData('submit',false);
         filters.blnReset        = (filters.blnReset !== undefined)        ? filters.blnReset        : filters.getData('reset',false);
