@@ -3,7 +3,7 @@ module.exports = function(app){
     //Filters.debug = true;
     Filters.createdAt      = "2.0.0";
     Filters.lastUpdate     = "2.7.0";
-    Filters.version        = "1.2.1";
+    Filters.version        = "1.2.2";
     // Filters.factoryExclude = true;
     // Filters.loadingMsg     = "This message will display in the console when component will be loaded.";
     // Filters.requires       = [];
@@ -102,7 +102,14 @@ module.exports = function(app){
             }
         }
         
-
+        if (filters.submit && filters.$el.closest('form').length) {
+            filters.$filters.filter('select').on('change',function(e){
+                if (filters.$el.closest('form').length){
+                    filters.$el.closest('form').trigger('submit');
+                    return false
+                }
+            });
+        } 
     }
     return Filters;
 }
