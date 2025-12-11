@@ -3,7 +3,7 @@ module.exports = function(app){
     //Filters.debug = true;
     Filters.createdAt      = "2.0.0";
     Filters.lastUpdate     = "2.7.0";
-    Filters.version        = "1.2.2";
+    Filters.version        = "1.2.3";
     // Filters.factoryExclude = true;
     // Filters.loadingMsg     = "This message will display in the console when component will be loaded.";
     // Filters.requires       = [];
@@ -11,7 +11,7 @@ module.exports = function(app){
     Filters.prototype.onCreate = function(){
         var filters = this;
         filters.$filters   = filters.$el.find('.filter').length                       ? filters.$el.find('.filter')                       : false;
-        filters.$container = $(filters.getData('container'),'#ThereIsNoContainer').length ? $(filters.getData('container'),false)         : false;
+        filters.$container = $(filters.getData('container','#ThereIsNoContainer')).length ? $(filters.getData('container'),false)         : false;
         if (filters.$container) 
             filters.$items     = filters.$container.find(filters.getData('items')).length ? filters.$container.find(filters.getData('items')) : false;
         else    
@@ -110,6 +110,7 @@ module.exports = function(app){
                 }
             });
         } 
+        return filters;
     }
     return Filters;
 }
